@@ -1,0 +1,6 @@
+- [ ] Criar códigos para obtenção dos frames
+- [X] Função que executa o CASco
+- [ ] Função de detecção de rosto
+- [ ] Função para segmentação do rosto
+- [ ] Função para validação dos resultados obtidos
+- [ ] Função para geração de matrizes de confusão
