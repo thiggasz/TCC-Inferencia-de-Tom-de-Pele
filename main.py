@@ -1,6 +1,12 @@
-from src.utils import get_folders
+from src.utils import get_folders, get_annotations, get_label, get_confusion_matrix
 from src.casco import run_casco
 
-# get_folders("Frames3")
+# get_folders("Frames1")
 
-run_casco()
+# run_casco()
+
+# get_annotations()
+
+get_label()
+
+# get_confusion_matrix()
