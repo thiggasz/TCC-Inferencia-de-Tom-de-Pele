@@ -1,6 +1,8 @@
-- [ ] Criar códigos para obtenção dos frames
-- [X] Função que executa o CASco
-- [ ] Função de detecção de rosto
-- [ ] Função para segmentação do rosto
-- [ ] Função para validação dos resultados obtidos
-- [ ] Função para geração de matrizes de confusão
+- [ ] 0 - Reproduzir experimento apresentados no artigo base
+- [ ] 1 - Avaliar métodos de processamento e verificar influência da segmentação no desempenho deles
+- [ ] 2 - Definir a regra para escolha dos frames a serem classificados
+- [ ] 3 - Criar as máscaras do rostos segmentados, sem atributos protegidos
+- [ ] 4 - Criar funções de leitura das entradas e saídas das predições
+- [ ] 5 - Padronizar script de execução e escrita dos resultados do CASCo
+- [ ] 6 - Criar função de cálculo do ITA baseado em uma máscara de entrada
+- [ ] 7 - Criar funções de avaliação dos resultados obtidos, incluindo representações visuais
