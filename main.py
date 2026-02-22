@@ -1,12 +1,18 @@
-from src.utils import get_folders, get_annotations, get_label, get_confusion_matrix
+from src.utils import get_folders, get_annotations, get_label
 from src.casco import run_casco
+from src.results_analysis import make_confusion_matrix, load_predictions, get_confusion_matrix, get_matrix_file, get_class_distribution
+import pandas as pd
 
-# get_folders("Frames1")
-
-# run_casco()
-
-# get_annotations()
+run_casco(1)
 
 get_label()
 
-# get_confusion_matrix()
+true_file = r"C:\Users\thiag\Documents\Faculdade\TCC\TCC-Inferencia-de-Tom-de-Pele\files\ccv2_filtered.csv"
+pred_file = r"C:\Users\thiag\Documents\Faculdade\TCC\TCC-Inferencia-de-Tom-de-Pele\results\casco\results_casco_1.csv"
+
+get_matrix_file(true_file, pred_file, 'fitzpatrick_type')
+
+matrix =  r"C:\Users\thiag\Documents\Faculdade\TCC\TCC-Inferencia-de-Tom-de-Pele\dados_para_matriz_confusao.csv"
+get_confusion_matrix(matrix)
+
+get_class_distribution('monk_scale')
