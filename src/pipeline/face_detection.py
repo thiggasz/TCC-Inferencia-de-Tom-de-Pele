@@ -5,7 +5,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-class FacePipeline:
+class FaceDetector:
     def __init__(self):
         # Initiliaze base face detector
         self.mp_face_detection = mp.solutions.face_detection
@@ -131,5 +131,5 @@ class FacePipeline:
             logging.error(f"OpenCv processing error: {e}")
             return None
         except Exception as e:
-            logging.error(f"Unexpected error in FacePipeline: {e}")
+            logging.error(f"Unexpected error in FaceDetector: {e}")
             return None

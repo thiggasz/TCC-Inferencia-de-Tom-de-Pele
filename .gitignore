@@ -1,6 +1,7 @@
-venv
+env
 results
 casco
 files
-utils
 __pycache__/
+src/libs/
+src/models/

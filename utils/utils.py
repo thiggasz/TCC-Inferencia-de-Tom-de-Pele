@@ -4,7 +4,7 @@ import csv
 import pandas as pd
 
 def get_folders(dataset):
-    root_dir = os.path.join(r"C:\Users\thiag\DatasetsCv2", dataset)
+    root_dir = os.path.join(r"C:\Users\thiag\Dataset CCv2", dataset)
 
     output_file = "paths.txt"
 
@@ -14,7 +14,7 @@ def get_folders(dataset):
             if os.path.isdir(path):
                 f.write(path + "\n")
 
-    print(f"Paths salvos em {output_file}")
+    print(f"Paths saved in: {output_file}")
     
 def get_annotations(): 
     input_file = r"C:\Users\thiag\Documents\Faculdade\TCC\TCC-Inferencia-de-Tom-de-Pele\files\CasualConversationsV2.json"
@@ -51,3 +51,6 @@ def get_label():
     result.to_csv("ccv2_filtered.csv", index=False, encoding="utf-8")
 
     print(result.head())
+    
+if __name__ == "__main__":
+    get_folders(4)

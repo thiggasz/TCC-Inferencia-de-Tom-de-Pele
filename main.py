@@ -1,11 +1,7 @@
-from src.utils import get_folders, get_annotations, get_label
 from src.casco import run_casco
-from src.results_analysis import make_confusion_matrix, load_predictions, get_confusion_matrix, get_matrix_file, get_class_distribution
-import pandas as pd
+from src.results_analysis import get_confusion_matrix, get_matrix_file, get_class_distribution
 
 run_casco(1)
-
-get_label()
 
 true_file = r"C:\Users\thiag\Documents\Faculdade\TCC\TCC-Inferencia-de-Tom-de-Pele\files\ccv2_filtered.csv"
 pred_file = r"C:\Users\thiag\Documents\Faculdade\TCC\TCC-Inferencia-de-Tom-de-Pele\results\casco\results_casco_1.csv"
