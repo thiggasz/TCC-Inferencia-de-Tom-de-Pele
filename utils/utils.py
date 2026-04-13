@@ -2,6 +2,7 @@ import os
 import json
 import csv
 import pandas as pd
+from pathlib import Path
 
 def get_folders(dataset):
     root_dir = os.path.join(r"C:\Users\thiag\Dataset CCv2", dataset)
@@ -51,6 +52,27 @@ def get_label():
     result.to_csv("ccv2_filtered.csv", index=False, encoding="utf-8")
 
     print(result.head())
+
+def get_paths():
+    input_file = r"C:\Users\thiag\Documents\Faculdade\TCC\TCC-Inferencia-de-Tom-de-Pele\files\paths\filtered.txt"
     
-if __name__ == "__main__":
-    get_folders(4)
+    if not os.path.exists(input_file):
+        print(f"{input_file} not found.")
+        return
+        
+    with open(input_file, 'r') as file:
+        image_paths = [line.strip() for line in file if line.strip()]
+        
+    return image_paths
+
+def get_file_paths(path_input):
+    base_path = Path(r'C:\Users\thiag\Dataset CCv2')
+    original_path = Path(path_input)
+    
+    safe_name = original_path.stem
+    
+    face_path = base_path / "Faces" / f"{safe_name}_face.png"
+    skin_path = base_path / "Masks" / f"{safe_name}_skin.png"
+    
+    return str(face_path), str(skin_path)
+    
