@@ -6,8 +6,23 @@ import csv
 from pathlib import Path
 from tqdm import tqdm
 from derm_ita import get_fitzpatrick_type
-from src.pipeline.skin_extraction import extract_patch
+from src.pipeline.skin_extraction import get_skin_pixels
 from utils.utils import get_paths, get_file_paths
+
+def get_monk_type(ita_value, thresholds):
+    for i, thresh in enumerate(thresholds):
+        if ita_value >= thresh:
+            return f"scale {i+1:02d}"
+    return "scale 10"
+
+def format_fitz(classification):
+    ROMAN_SCALE = {
+        '1': 'type i', '2': 'type ii', '3': 'type iii', 
+        '4': 'type iv', '5': 'type v', '6': 'type vi'
+    }
+    
+    tone_roman = ROMAN_SCALE.get(str(classification), "N/A")
+    return tone_roman
 
 def calc_ita(median_bgr):
     bgr_pixel = np.array([[median_bgr]], dtype=np.float32)
@@ -44,23 +59,8 @@ def get_monk_thresholds():
         
     return thresholds
 
-def get_monk_type(ita_value, thresholds):
-    for i, thresh in enumerate(thresholds):
-        if ita_value >= thresh:
-            return f"scale {i+1:02d}"
-    return "scale 10"
-
-def format_fitz(classification):
-    ROMAN_SCALE = {
-        '1': 'type i', '2': 'type ii', '3': 'type iii', 
-        '4': 'type iv', '5': 'type v', '6': 'type vi'
-    }
-    
-    tone_roman = ROMAN_SCALE.get(str(classification), "N/A")
-    return tone_roman
-
 def run_ita(result_path, scale):
-    columns = ['File', f'Tone label ({scale.capitalize()})', 'ITA Value']
+    columns = ['File', f'Tone label', 'ITA Value']
     image_paths = get_paths()
     
     file_exists = os.path.exists(result_path)
@@ -73,15 +73,16 @@ def run_ita(result_path, scale):
             writer.writerow(columns)
 
         for path in tqdm(image_paths, desc=f"Calculating ITA ({scale})"):
-            _, skin_path = get_file_paths(path)
+            _, skin_path, mask_path = get_file_paths(path)
 
             img_skin = cv2.imread(skin_path)
+            img_mask = cv2.imread(mask_path)
             
             if img_skin is None:
                 print(f"Error: The image couldn't be read: {skin_path}")
                 continue
             
-            median_bgr, _ = extract_patch(img_skin)
+            median_bgr, _ = get_skin_pixels(img_skin, img_mask)
             
             if median_bgr is not None:
                 ita_value = calc_ita(median_bgr)
