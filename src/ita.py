@@ -59,8 +59,8 @@ def get_monk_thresholds():
         
     return thresholds
 
-def run_ita(result_path, scale):
-    columns = ['File', f'Tone label', 'ITA Value']
+def run_ita(scale, result_path='results_ita.csv'):
+    columns = ['file', 'tone label', 'ITA value']
     image_paths = get_paths()
     
     file_exists = os.path.exists(result_path)

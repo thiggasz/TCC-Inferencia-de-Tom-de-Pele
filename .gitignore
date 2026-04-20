@@ -5,3 +5,5 @@ files
 __pycache__/
 src/libs/
 src/models/
+.vscode
+*.csv

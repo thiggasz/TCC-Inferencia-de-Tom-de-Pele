@@ -77,8 +77,8 @@ def clusterize_skin(skin_pixels, scale, clusters=3):
             
     return closest_match, dominant_color_bgr
 
-def run_clustering(result_path, scale, clusters=3):
-    columns = ['File', f'Tone label', 'Dominat color']
+def run_clustering(scale, clusters=3, result_path='results_clustering.csv'):
+    columns = ['file', 'tone label', 'dominat color']
     image_paths = get_paths()
     
     file_exists = os.path.exists(result_path)

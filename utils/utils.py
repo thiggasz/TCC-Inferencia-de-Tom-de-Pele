@@ -72,7 +72,10 @@ def get_file_paths(path_input):
     safe_name = original_path.stem
     
     face_path = base_path / "Faces" / f"{safe_name}_face.png"
-    skin_path = base_path / "Masks" / f"{safe_name}_skin.png"
+    skin_path = base_path / "Skins" / f"{safe_name}_skin.png"
+    mask_path = base_path / "Masks" / f"{safe_name}_mask.png"
     
-    return str(face_path), str(skin_path)
-    
+    return str(face_path), str(skin_path), str(mask_path)
+
+if __name__ == "__main__":
+    get_annotations()    

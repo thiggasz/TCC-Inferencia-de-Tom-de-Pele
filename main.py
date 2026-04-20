@@ -6,8 +6,8 @@ from utils.utils import get_paths
 from src.pipeline.face_detection import FaceDetector
 from src.pipeline.face_segmentation import FaceSegmenter
 from src.clustering import run_clustering
-from src.results_analysis import get_matrix_file, get_confusion_matrix
 from src.ita import run_ita
+from analysis.results_analysis import analyse_results
 
 FACE_FOLDER = r"C:\Users\thiag\Dataset CCv2\Faces"
 SKIN_FOLDER = r"C:\Users\thiag\Dataset CCv2\Skins"
