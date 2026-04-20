@@ -1,5 +1,5 @@
 import torch
-from libs.FaceParser.inference import Segmentator
+from src.libs.FaceParser.inference import Segmentator
 from typing import Tuple, List, Generator
 from tqdm import tqdm
 import numpy as np
@@ -20,14 +20,13 @@ class FaceSegmenter:
         
         if self.device.type == 'cuda':
             gpu_name = torch.cuda.get_device_name(0)
-            print(f"GPU detectada: Usando {gpu_name} para segmentação.")
+            print(f"GPU detected: Using {gpu_name} for segmentation.")
         else:
-            print("Aviso: Nenhuma GPU detectada. Usando CPU para segmentação (será mais lento).")
+            print("Aviso: GPU not detected. Using CPU for segmentation.")
             
         self.batch_size = batch_size
 
     def deep_segmentation(self, image: np.array) -> Tuple[np.array, np.array]:
-        # Parâmetro inútil removido
         return self.segmentator.inference(image)
 
     def batch_list(self, data: List[np.array]) -> List[List[np.array]]:

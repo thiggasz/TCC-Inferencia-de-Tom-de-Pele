@@ -3,7 +3,12 @@ import numpy as np
 import mediapipe as mp
 import logging
 
-logging.basicConfig(level=logging.INFO)
+"""""
+
+Given a imagem detects the bounding box of the face, align the eye landmarks, and obtains the crop
+of the detected face aligned
+
+""""" 
 
 class FaceDetector:
     def __init__(self):
@@ -128,8 +133,8 @@ class FaceDetector:
             return final_face
             
         except cv2.error as e:
-            logging.error(f"OpenCv processing error: {e}")
+            print(f"OpenCv processing error: {e}")
             return None
         except Exception as e:
-            logging.error(f"Unexpected error in FaceDetector: {e}")
+            print(f"Unexpected error in FaceDetector: {e}")
             return None
