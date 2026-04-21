@@ -90,16 +90,16 @@ def run_clustering(scale, clusters=3, result_path='results_clustering.csv'):
             writer.writerow(columns)
 
         for path in tqdm(image_paths, desc=f"Calculating Clustering ({scale})"):
-            _, skin_path, mask_path = get_file_paths(path)
+            face_path, _, mask_path = get_file_paths(path)
             
-            img_skin = cv2.imread(skin_path)
+            img_face = cv2.imread(face_path)
             img_mask = cv2.imread(mask_path)
             
-            if img_skin is None:
-                print(f"Error: The image couldn't be read: {skin_path}")
+            if img_face is None:
+                print(f"Error: The image couldn't be read: {face_path}")
                 continue
             
-            _, skin_pixels = get_skin_pixels(img_skin, img_mask)
+            _, skin_pixels = get_skin_pixels(img_face, img_mask)
             
             tone_label, dominant_color = clusterize_skin(skin_pixels, scale, clusters)
             

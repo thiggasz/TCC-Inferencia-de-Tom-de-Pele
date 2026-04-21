@@ -1,12 +1,13 @@
 import cv2
 import numpy as np
 
-def get_skin_pixels(segmented_bgr, skin_mask):
+def get_skin_pixels(img_face, img_mask):
     """Given a image of segmentated skin, returns the median BGR color and a skin pixels array"""
     
     # Obtain the skin pixels based on the mask
-    is_skin = np.all(skin_mask == [255, 255, 255], axis=-1) 
-    skin_pixels_bgr = segmented_bgr[is_skin]
+    mask_gray = cv2.cvtColor(img_mask, cv2.COLOR_BGR2GRAY)
+    is_skin = mask_gray > 127
+    skin_pixels_bgr = img_face[is_skin]
     
     if len(skin_pixels_bgr) == 0:
         return None, None

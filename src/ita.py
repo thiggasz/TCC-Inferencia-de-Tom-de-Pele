@@ -73,17 +73,17 @@ def run_ita(scale, result_path='results_ita.csv'):
             writer.writerow(columns)
 
         for path in tqdm(image_paths, desc=f"Calculating ITA ({scale})"):
-            _, skin_path, mask_path = get_file_paths(path)
+            face_path, _, mask_path = get_file_paths(path)
 
-            img_skin = cv2.imread(skin_path)
+            img_face = cv2.imread(face_path)
             img_mask = cv2.imread(mask_path)
             
-            if img_skin is None:
-                print(f"Error: The image couldn't be read: {skin_path}")
+            if img_face is None:
+                print(f"Error: The image couldn't be read: {face_path}")
                 continue
             
-            median_bgr, _ = get_skin_pixels(img_skin, img_mask)
-            
+            median_bgr, teste = get_skin_pixels(img_face, img_mask)
+        
             if median_bgr is not None:
                 ita_value = calc_ita(median_bgr)
                 
