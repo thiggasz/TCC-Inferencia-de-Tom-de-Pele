@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib as plt
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -92,12 +92,23 @@ def get_confusion_matrix(df_matrix, title):
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=sorted(df_matrix["true_label"].unique()))
     disp.plot(cmap="Blues", xticks_rotation=45, ax=ax, values_format='.2f')
 
-    plt.title(title)
+    # plt.title(title)
     plt.show()
+   
+def get_classification_metrics(df_matrix):
+    y_true = df_matrix['true_label'].astype(str)
+    y_pred = df_matrix['predicted_label'].astype(str)
+    
+    labels = sorted(y_true.unique())
+    
+    print(classification_report(y_true, y_pred, labels=labels, zero_division=0))
     
 def analyse_results(predicions_file, method, scale, save_file=False):
     matrix_scale = 'monk_scale' if scale == 'monk' else 'fitzpatrick_type'
-    title = f'Confusion Matrix {method} using {scale} scale'
+    title = f'Matriz de confusão {method.capitalize()} na escala {scale.capitalize()}'
     
     df_matrix = get_matrix_file(predicions_file, matrix_scale, save_file)
+    
+    get_classification_metrics(df_matrix)
+    
     get_confusion_matrix(df_matrix, title)
